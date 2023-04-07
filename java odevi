@@ -1,9 +1,42 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.hafta6;
+
+/**
+ *
+ * @author SONY
+ */
+/*Kurallar
+
+Taş makası kırar, makas kağıdı keser, kağıt taşı sarar. (taş > makas, makas > kağıt, kağıt > taş)
+Oynayacak iki kişinin isimlerini soracak.
+Program, kullanıcıya oyun oynamak istediği tur sayısını soracak ve tur sayısını alacak.
+Toplam tur sayısı kullanıcı tarafından belirlenecek ve en az 1, en fazla 10 tur olabilir.
+Oyuncular sırayla taş, kağıt ya da makas seçecekler.
+Oyuncular birbirlerinin tercihlerini konsolda görecekleri için adil olmayacağından bilgisayara karşı oynayacaktır.
+Kazanan oyuncu her turda 1 puan alır, beraberlik durumunda her iki oyuncu da 1 puan alır.
+Program, her tur sonunda kazananın sayısını kaydedecek ve sonuçları yazdıracak.
+Oyun bittiğinde kazananın adı ve kazandığı toplam tur sayısı ekrana yazdırılacak.
+Oyunu baştan başlatmak isteyip istemediği sorularak.
+Programın kodları açıklanacak ve uygun bir şekilde biçimlendirilecek (Yorum).
+ 
+İpuçları
+
+Scanner sınıfını kullanarak kullanıcı adlarını ve tur sayısını alabilirsiniz.
+Tur sayısı için do-while döngüsü kullanarak, kullanıcının 1-10 arasında bir sayı girene kadar isteklerde bulunabilirsiniz.
+Oyuncuların TAŞ, KAĞIT, MAKAS seçimleri için Scanner sınıfını kullanabilirsiniz.
+Her tur sonunda, Random sınıfını kullanarak bir sayı üretin ve buna göre bilgisayarın seçimini belirleyip kullanıcıların kazandıkları puanları hesaplayabilir.
+Kazananı hesaplamak için bir sonucHesapla() gibi bir metoda ihtiyacınız olabilir. Bu metod, oyuncuların seçimlerini parametre olarak alacak ve kazananı belirleyecek.
+Sonucu bir String olarak geri döndürebilirsiniz (return).
+Sonucu hesaplamak için if-else veya switch-case yapısını kullanabilirsiniz.
+Kazananı belirlemek için toplam tur sayısını ve kazananın sayısını takip edebilirsiniz.*/
 import java.util.Scanner;
 
 public class NewClass {
 
     public static void main(String[] args) {
-                       System.out.println(""); //\
         System.out.println("1.kisinin isimini gir: ");
         Scanner oku = new Scanner(System.in); // scanner sinifini kullandim
         String isim = oku.nextLine();
@@ -15,6 +48,7 @@ public class NewClass {
         
         int bilgisayarKazandi = 0;
         int senKazandin = 0;
+        int tie = 0;
         for (int i = 1; i <= turSayisi; i++) {
             System.out.println("\nLutfen bir numara secin : 1.makas 2.kagit 3.tas ");
         int secim = oku.nextInt();
@@ -33,7 +67,7 @@ public class NewClass {
             default:
                 throw new AssertionError();
         }
-        int bilgisayarSecim = (int) Math.round(Math.random() * 3 + 1);
+        int bilgisayarSecim = (int) Math.round(Math.random() * 2 + 1);
         System.out.print("\n"+isim2 + " secimi: ");
         switch (bilgisayarSecim) {
             case 1:
@@ -51,35 +85,41 @@ public class NewClass {
         }
             if ((secim == 1 && bilgisayarSecim ==1 ) || (secim == 2 && bilgisayarSecim ==2 )||(secim == 3 && bilgisayarSecim ==3 ) ) {
                 System.out.println("Draw");
+                ++tie;
                 System.out.println("**************************************************");
             
             }
             else if((secim == 1 && bilgisayarSecim == 2 ) ||(secim == 2 && bilgisayarSecim ==3 ) || (secim == 3 && bilgisayarSecim == 1 )){
-                System.out.println("Siz kazandiniz!");
-                senKazandin++;
+                
+                System.out.println("\n"+" Siz kazandiniz!");
+                ++senKazandin;
                 System.out.println("**************************************************");
                 
             }
             else if((secim == 1 && bilgisayarSecim ==3 )||(secim == 2 && bilgisayarSecim ==1 )||(secim == 3 && bilgisayarSecim ==2 )){
-                System.out.println(isim2+ " kazandi!");
-                bilgisayarKazandi++;
+                
+                System.out.println("\n "+" "+isim2+ " kazandi!");
+                ++bilgisayarKazandi;
                 System.out.println("**************************************************");
                 
             }
             else{System.out.println("Error");}
             
         }
+        System.out.println("Siz "+turSayisi+" kere oynadiniz.");
         System.out.println("Siz "+senKazandin+" kere kazandiniz");
-        System.out.println(isim2 +" "+ senKazandin+" kere kazandi");
+        System.out.println(isim2 +" "+ bilgisayarKazandi+" kere kazandi");
+        System.out.println("tie: " + tie);
+        
         
         if(senKazandin > bilgisayarKazandi){
-            System.out.println("Siz kazandiniz!");
+            System.out.println("Sonuc : Siz kazandiniz!");
         }
         else if(senKazandin < bilgisayarKazandi){
-            System.out.println(isim2+" kazandi");
+            System.out.println("Sonuc : "+isim2+" kazandi");
         }
         else{
-            System.out.println("Tie!");
+            System.out.println("Sonuc : Tie!");
         }
     }
 
