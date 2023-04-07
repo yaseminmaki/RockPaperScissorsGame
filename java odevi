@@ -1,0 +1,87 @@
+import java.util.Scanner;
+
+public class NewClass {
+
+    public static void main(String[] args) {
+                       System.out.println(""); //\
+        System.out.println("1.kisinin isimini gir: ");
+        Scanner oku = new Scanner(System.in); // scanner sinifini kullandim
+        String isim = oku.nextLine();
+        System.out.println("2.kisinin isimini gir: ");
+        String isim2 = oku.nextLine();
+        System.out.println("oyuncularin isimi: " + isim + " ve " + isim2+"\n");
+        System.out.println("Kac tur oynayacaksiniz ? en az 1, en fazla 10 tur olabilir.");
+        int turSayisi = oku.nextInt();
+        
+        int bilgisayarKazandi = 0;
+        int senKazandin = 0;
+        for (int i = 1; i <= turSayisi; i++) {
+            System.out.println("\nLutfen bir numara secin : 1.makas 2.kagit 3.tas ");
+        int secim = oku.nextInt();
+        System.out.print("Sizin Seciminiz: ");
+        switch (secim) {
+            case 1:
+                System.out.println("makas ");
+                break;
+            case 2:
+                System.out.println("kagit ");
+                break;
+            case 3:
+                System.out.println("tas ");
+                break;
+
+            default:
+                throw new AssertionError();
+        }
+        int bilgisayarSecim = (int) Math.round(Math.random() * 3 + 1);
+        System.out.print("\n"+isim2 + " secimi: ");
+        switch (bilgisayarSecim) {
+            case 1:
+                System.out.println("makas");
+                break;
+            case 2:
+                System.out.println("kagit");
+                break;
+            case 3:
+                System.out.println("tas");
+                break;
+
+            default:
+                throw new AssertionError();
+        }
+            if ((secim == 1 && bilgisayarSecim ==1 ) || (secim == 2 && bilgisayarSecim ==2 )||(secim == 3 && bilgisayarSecim ==3 ) ) {
+                System.out.println("Draw");
+                System.out.println("**************************************************");
+            
+            }
+            else if((secim == 1 && bilgisayarSecim == 2 ) ||(secim == 2 && bilgisayarSecim ==3 ) || (secim == 3 && bilgisayarSecim == 1 )){
+                System.out.println("Siz kazandiniz!");
+                senKazandin++;
+                System.out.println("**************************************************");
+                
+            }
+            else if((secim == 1 && bilgisayarSecim ==3 )||(secim == 2 && bilgisayarSecim ==1 )||(secim == 3 && bilgisayarSecim ==2 )){
+                System.out.println(isim2+ " kazandi!");
+                bilgisayarKazandi++;
+                System.out.println("**************************************************");
+                
+            }
+            else{System.out.println("Error");}
+            
+        }
+        System.out.println("Siz "+senKazandin+" kere kazandiniz");
+        System.out.println(isim2 +" "+ senKazandin+" kere kazandi");
+        
+        if(senKazandin > bilgisayarKazandi){
+            System.out.println("Siz kazandiniz!");
+        }
+        else if(senKazandin < bilgisayarKazandi){
+            System.out.println(isim2+" kazandi");
+        }
+        else{
+            System.out.println("Tie!");
+        }
+    }
+
+
+}
