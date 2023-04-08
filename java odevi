@@ -37,23 +37,29 @@ import java.util.Scanner;
 public class NewClass {
 
     public static void main(String[] args) {
-        System.out.println("1.kisinin isimini gir: ");
+        System.out.println("1.kisinin isimini gir: "); 
         Scanner oku = new Scanner(System.in); // scanner sinifini kullandim
-        String isim = oku.nextLine();
+        String isim = oku.nextLine(); //1.isim okuyacak
         System.out.println("2.kisinin isimini gir: ");
-        String isim2 = oku.nextLine();
-        System.out.println("oyuncularin isimi: " + isim + " ve " + isim2+"\n");
-        System.out.println("Kac tur oynayacaksiniz ? en az 1, en fazla 10 tur olabilir.");
-        int turSayisi = oku.nextInt();
+        String isim2 = oku.nextLine();//1.isim okuyacak
+        System.out.println("oyuncularin isimi: " + isim + " ve " + isim2+"\n"); //oyuncularin isimlerini yazdiracak
+        System.out.println("Kac tur oynayacaksiniz ? en az 1, en fazla 10 tur olabilir."); // tur sayisi soruyor
+        int turSayisi = oku.nextInt(); // tur sayisi okudu
+        if(turSayisi > 10 || turSayisi<1){ // kontrol edecek tur sayisi gecerli mi diye
+            System.out.println("Lutfen gecerli bir sayi giriniz.");
+            System.exit(0); // gecerli degilse programdan cikacak
+        }
         
-        int bilgisayarKazandi = 0;
-        int senKazandin = 0;
-        int tie = 0;
-        for (int i = 1; i <= turSayisi; i++) {
-            System.out.println("\nLutfen bir numara secin : 1.makas 2.kagit 3.tas ");
-        int secim = oku.nextInt();
-        System.out.print("Sizin Seciminiz: ");
-        switch (secim) {
+        int bilgisayarKazandi = 0; // bilgisayar kac kere kazandi hesabi
+        int senKazandin = 0;   // oyuncunun kac kere kazandi hesabi      
+
+        int i = 1;
+        int tie = 0; //berabere hesabi
+        do {
+            System.out.println("\nLutfen bir numara secin : 1.makas 2.kagit 3.tas "); // kullanci sececek
+        int secim = oku.nextInt(); // secim numarasi okuyacak
+        System.out.print("\n"+isim + " secimi: ");
+        switch (secim) { // secimin ne oldugunu belirleme
             case 1:
                 System.out.println("makas ");
                 break;
@@ -67,9 +73,9 @@ public class NewClass {
             default:
                 throw new AssertionError();
         }
-        int bilgisayarSecim = (int) Math.round(Math.random() * 2 + 1);
+        int bilgisayarSecim = (int) Math.round(Math.random() * 2 + 1); //random kullanarak bilgisayar secimi
         System.out.print("\n"+isim2 + " secimi: ");
-        switch (bilgisayarSecim) {
+        switch (bilgisayarSecim) { //secimin ne oldugunu belirleme
             case 1:
                 System.out.println("makas");
                 break;
@@ -83,15 +89,15 @@ public class NewClass {
             default:
                 throw new AssertionError();
         }
-            if ((secim == 1 && bilgisayarSecim ==1 ) || (secim == 2 && bilgisayarSecim ==2 )||(secim == 3 && bilgisayarSecim ==3 ) ) {
-                System.out.println("Draw");
+            if ((secim == 1 && bilgisayarSecim ==1 ) || (secim == 2 && bilgisayarSecim ==2 )||(secim == 3 && bilgisayarSecim ==3 ) ) { 
+                System.out.println("Berabere");
                 ++tie;
                 System.out.println("**************************************************");
             
             }
             else if((secim == 1 && bilgisayarSecim == 2 ) ||(secim == 2 && bilgisayarSecim ==3 ) || (secim == 3 && bilgisayarSecim == 1 )){
                 
-                System.out.println("\n"+" Siz kazandiniz!");
+                System.out.println("\n "+" "+isim+ " kazandi!");
                 ++senKazandin;
                 System.out.println("**************************************************");
                 
@@ -104,24 +110,34 @@ public class NewClass {
                 
             }
             else{System.out.println("Error");}
+            i++;
             
-        }
-        System.out.println("Siz "+turSayisi+" kere oynadiniz.");
-        System.out.println("Siz "+senKazandin+" kere kazandiniz");
+        }while(i<=turSayisi);
+        //sonuclar
+        System.out.println("########################");
+        System.out.println("Sonuclar!!!!");
+        System.out.println("########################");
+        System.out.println("Siz "+turSayisi+" kere oynadiniz."); //toplam tur sayısı
+        System.out.println(isim +" "+senKazandin+" kere kazandi");
         System.out.println(isim2 +" "+ bilgisayarKazandi+" kere kazandi");
-        System.out.println("tie: " + tie);
+        System.out.println("Berabere: " + tie);
+        System.out.println(sounclarHesapla(senKazandin, bilgisayarKazandi, isim, isim2));
         
-        
-        if(senKazandin > bilgisayarKazandi){
-            System.out.println("Sonuc : Siz kazandiniz!");
+    }
+    public static String sounclarHesapla(int kazanim1, int kazanim2,String isim1, String isim2){ // sonuclar hesaplamak icin bir fonksiyon olusturdum
+            //kim kazandi kontrol edecek
+        if(kazanim1 > kazanim2){
+            return "Sonuc : "+isim1+" kazandi,tebrikler!!";
         }
-        else if(senKazandin < bilgisayarKazandi){
-            System.out.println("Sonuc : "+isim2+" kazandi");
+        else if(kazanim1< kazanim2){
+            return "Sonuc : "+isim2+" kazandi,tebrikler!!";
         }
         else{
-            System.out.println("Sonuc : Tie!");
+           return "Sonuc : Berabere!";
         }
-    }
+    
+}
 
 
 }
+
