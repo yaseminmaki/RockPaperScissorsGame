@@ -56,7 +56,8 @@ public class NewClass {
         int i = 1;
         int tie = 0; //berabere hesabi
         do {
-            System.out.println("\nLutfen bir numara secin : 1.Tas 2.Kagit 3.Makas "); // kullanci sececek
+            System.out.println(i+". Tur");
+         System.out.println("\nLutfen bir numara secin : 1.Tas 2.Kagit 3.Makas "); // kullanci sececek
         int secim = oku.nextInt(); // secim numarasi okuyacak
         System.out.print("\n"+isim + " secimi: ");
         switch (secim) { // secimin ne oldugunu belirleme
